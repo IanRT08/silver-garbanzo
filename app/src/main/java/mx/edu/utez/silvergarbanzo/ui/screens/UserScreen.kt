@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,8 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
-import androidx.compose.material3.SearchBar
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,24 +26,27 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import mx.edu.utez.silvergarbanzo.ui.components.images.IconImage
-import mx.edu.utez.silvergarbanzo.ui.theme.SilverGarbanzoTheme
-import mx.edu.utez.silvergarbanzo.viewmodel.HomeViewModel
 import mx.edu.utez.silvergarbanzo.R
 import mx.edu.utez.silvergarbanzo.ui.components.PeliPreviewCard
 import mx.edu.utez.silvergarbanzo.ui.components.SearchField
+import mx.edu.utez.silvergarbanzo.ui.components.cards.PeliFavCard
 import mx.edu.utez.silvergarbanzo.ui.components.cards.PeliSmallCard
+import mx.edu.utez.silvergarbanzo.ui.components.cards.RecentCard
+import mx.edu.utez.silvergarbanzo.ui.components.cards.RecentCardLike
 import mx.edu.utez.silvergarbanzo.ui.components.cards.ReseñaCard
+import mx.edu.utez.silvergarbanzo.ui.components.images.CircularImage
+import mx.edu.utez.silvergarbanzo.ui.components.images.IconImage
 import mx.edu.utez.silvergarbanzo.ui.components.images.IconSmall
-import mx.edu.utez.silvergarbanzo.ui.components.images.ImageLogin
 import mx.edu.utez.silvergarbanzo.ui.components.images.PromoImage
 import mx.edu.utez.silvergarbanzo.ui.components.texts.Label
 import mx.edu.utez.silvergarbanzo.ui.components.texts.Link
-import mx.edu.utez.silvergarbanzo.ui.components.texts.Title
 import mx.edu.utez.silvergarbanzo.ui.components.texts.UserLabel
+import mx.edu.utez.silvergarbanzo.ui.theme.SilverGarbanzoTheme
+import mx.edu.utez.silvergarbanzo.viewmodel.HomeViewModel
+import mx.edu.utez.silvergarbanzo.viewmodel.UserViewModel
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel, navController: NavController) {
+fun UserScreen(viewModel: UserViewModel, navController: NavController){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -57,45 +59,9 @@ fun HomeScreen(viewModel: HomeViewModel, navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Row (modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                IconImage(R.drawable.icon)
-                Spacer(modifier = Modifier.width(10.dp))
-                Link("@silvergarbanzo"){navController.navigate("user")}
-                Spacer(modifier = Modifier.width(35.dp))
-                IconSmall(R.drawable.salir, size = 25,  navController = navController, navigateTo = "login")
-            }
-            Spacer(modifier = Modifier.height(15.dp))
-            PromoImage(R.drawable.wicked)
-            Spacer(modifier = Modifier.height(15.dp))
-            Row (modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row (
-                    modifier = Modifier
-                        .border(
-                        border = BorderStroke(1.dp, Color.Gray,),
-                        shape = RoundedCornerShape(1.dp),
-                    )
-                ){
-                    Spacer(modifier = Modifier.width(20.dp))
-                    Label("Popular", modifier = Modifier.padding(4.dp), fontSize = 10)
-                    Spacer(modifier = Modifier.width(20.dp))
-                    Label("Año", modifier = Modifier.padding(4.dp), fontSize = 10)
-                    Spacer(modifier = Modifier.width(20.dp))
-                    Label("Género", modifier = Modifier.padding(4.dp), fontSize = 10)
-                    Spacer(modifier = Modifier.width(20.dp))
-                }
-                Spacer(modifier = Modifier.width(20.dp))
-                SearchField(
-                    modifier = Modifier
-                        .height(30.dp)
-                        .width(90.dp),
-                    onClick = {navController.navigate("login") } //Se cambiara de login a la pantalla de buscar
-                    )}
+            CircularImage(R.drawable.garbanzo)
+            Spacer(modifier = Modifier.height(5.dp))
+            UserLabel("silvergarbanzo", color = Color(0xFFD0D0D0))
             Spacer(modifier = Modifier.height(15.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -103,12 +69,8 @@ fun HomeScreen(viewModel: HomeViewModel, navController: NavController) {
             ){
                 Spacer(modifier = Modifier.width(15.dp))
                 Label(
-                    "Populares esta semana",
+                    "Peliculas favoritas",
                 )
-                Spacer(modifier = Modifier.width(55.dp))
-                Link("Más", modifier = Modifier.fillMaxWidth(),textAlign = TextAlign.End) {
-                    navController.navigate("ver_mas")
-                }
                 Spacer(modifier = Modifier.width(15.dp))
             }
             Divider()
@@ -117,11 +79,13 @@ fun HomeScreen(viewModel: HomeViewModel, navController: NavController) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                PeliPreviewCard(R.drawable.dps, "1M")
+                PeliFavCard(R.drawable.mins31)
                 Spacer(modifier = Modifier.width(10.dp))
-                PeliPreviewCard(R.drawable.mamma_mia, "340K")
+                PeliFavCard(R.drawable.grease)
                 Spacer(modifier = Modifier.width(10.dp))
-                PeliPreviewCard(R.drawable.lalaland, "800K")
+                PeliFavCard(R.drawable.legally)
+                Spacer(modifier = Modifier.width(10.dp))
+                PeliFavCard(R.drawable.prada)
             }
             Spacer(modifier = Modifier.height(15.dp))
             Row(
@@ -130,8 +94,9 @@ fun HomeScreen(viewModel: HomeViewModel, navController: NavController) {
             ){
                 Spacer(modifier = Modifier.width(15.dp))
                 Label(
-                    "Reseñadas ahora mismo",
+                    "Actividad reciente",
                 )
+                Spacer(modifier = Modifier.width(15.dp))
             }
             Divider()
             Spacer(modifier = Modifier.height(15.dp))
@@ -139,15 +104,11 @@ fun HomeScreen(viewModel: HomeViewModel, navController: NavController) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                PeliSmallCard(R.drawable.hamilton)
+                RecentCardLike(R.drawable.club, R.drawable.rate4)
                 Spacer(modifier = Modifier.width(10.dp))
-                PeliSmallCard(R.drawable.interstellar)
+                RecentCard(R.drawable.wedding, R.drawable.rate1)
                 Spacer(modifier = Modifier.width(10.dp))
-                PeliSmallCard(R.drawable.tick__tickboom)
-                Spacer(modifier = Modifier.width(10.dp))
-                PeliSmallCard(R.drawable.fight_club)
-                Spacer(modifier = Modifier.width(10.dp))
-                PeliSmallCard(R.drawable.spiderman_into)
+                RecentCardLike(R.drawable.scream, R.drawable.rate3)
                 Spacer(modifier = Modifier.width(10.dp))
                 IconSmall(
                     R.drawable.next,
@@ -155,25 +116,75 @@ fun HomeScreen(viewModel: HomeViewModel, navController: NavController) {
                     navController = navController,
                     navigateTo = "login"
                 ) //navigate to se cambiara a registros
+
             }
             Spacer(modifier = Modifier.height(15.dp))
+            Divider()
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Start
             ){
                 Spacer(modifier = Modifier.width(15.dp))
-                Label(
-                    "Reseñas populares",
-                )
+                Link("Likes",){navController.navigate("ver_likes")} //ruta a ver likes
             }
             Divider()
-            Spacer(modifier = Modifier.height(15.dp))
-            ReseñaCard(
-                R.drawable.superman,
-                nombrePeli = "Superman",
-                username = "goldengarbanzo",
-                desc = "De las mejores peliculas que he visto este año"
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Start
+            ){
+                Spacer(modifier = Modifier.width(15.dp))
+                Link("Registros",){navController.navigate("ver_mas")} //ruta a ver registros
+            }
+            Divider()
+            Spacer(modifier = Modifier.height(50.dp))
+            Row (
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .border(
+                        border = BorderStroke(1.dp, Color.Gray,),
+                        shape = RoundedCornerShape(5.dp),)
+                    .fillMaxWidth()
+                    .height(70.dp)
+            ){
+                Spacer(modifier = Modifier.width(20.dp))
+                IconSmall(
+                    R.drawable.lupa,
+                    size = 40,
+                    navController = navController,
+                    navigateTo = "login"
+                ) //navigate to se cambiara a buscar
+                Spacer(modifier = Modifier.width(20.dp))
+                IconSmall(
+                    R.drawable.likes,
+                    size = 40,
+                    navController = navController,
+                    navigateTo = "login"
+                ) //navigate to se cambiara a likes
+                Spacer(modifier = Modifier.width(20.dp))
+                IconSmall(
+                    R.drawable.home,
+                    size = 40,
+                    navController = navController,
+                    navigateTo = "home"
+                )
+                Spacer(modifier = Modifier.width(20.dp))
+                IconSmall(
+                    R.drawable.agregar,
+                    size = 40,
+                    navController = navController,
+                    navigateTo = "agregar"
+                ) //navigate to se cambiara a agregar
+                Spacer(modifier = Modifier.width(20.dp))
+                IconSmall(
+                    R.drawable.registros,
+                    size = 40,
+                    navController = navController,
+                    navigateTo = "registros"
+                ) //navigate to se cambiara a registros
+                Spacer(modifier = Modifier.width(20.dp))
+            }
+
         }
     }
 }
@@ -181,11 +192,11 @@ fun HomeScreen(viewModel: HomeViewModel, navController: NavController) {
 @SuppressLint("ViewModelConstructorInComposable")
 @Preview(showBackground = true)
 @Composable
-fun PreviewHomeScreen() {
+fun PreviewUserScreen() {
     SilverGarbanzoTheme {
         val navController = rememberNavController()
-        val viewModel = HomeViewModel()
-        HomeScreen(
+        val viewModel = UserViewModel()
+        UserScreen(
             viewModel = viewModel,
             navController = navController
         )
