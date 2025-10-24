@@ -3,6 +3,7 @@ package mx.edu.utez.silvergarbanzo.ui.screens
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +13,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Divider
+import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -51,23 +56,7 @@ fun MovieEditScreen (viewmodel: MovieEditViewmodel, navController: NavController
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconImage(R.drawable.icon)
-                Spacer(modifier = Modifier.width(10.dp))
-                Link("@silvergarbanzo") { navController.navigate("user") }
-                Spacer(modifier = Modifier.width(35.dp))
-                IconSmall(
-                    R.drawable.salir,
-                    size = 25,
-                    navController = navController,
-                    navigateTo = "login"
-                )
-            }
-            Spacer(modifier = Modifier.height(15.dp))
+
             Row (modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Absolute.Left,
                 verticalAlignment = Alignment.CenterVertically,
@@ -97,43 +86,63 @@ fun MovieEditScreen (viewmodel: MovieEditViewmodel, navController: NavController
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(15.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Start
-            ) {
-                Spacer(modifier = Modifier.width(15.dp))
-                Label(
-                    "Fecha en la que se vio la pelicula: 24 | 10 | 23",
-                )
-            }
-            Spacer(modifier = Modifier.height(15.dp))
+
+            Spacer(modifier = Modifier.height(12.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Start
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Spacer(modifier = Modifier.width(15.dp))
-                Label(
-                    "Calificación",
-                )
+                Column {
+                    Text("24/10/2023", color = Color.White)
 
+                }
             }
+
+            Divider(
+                color = Color.Gray,
+                thickness = 1.dp,
+                modifier = Modifier
+                    .padding(vertical = 8.dp)
+            )
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Start
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Spacer(modifier = Modifier.width(15.dp))
-                Image(
-                    painter = painterResource(R.drawable.rate4),
-                    contentDescription = "Rating",
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier
-                        .width(60.dp)
-                        .height(20.dp)
-                )
+                Column {
+                    Text("Calificación", color = Color.White)
+                    Row {
+                        Image(
+                            painter = painterResource(R.drawable.rate5),
+                            contentDescription = "Rating",
+                            contentScale = ContentScale.Fit,
+                            modifier = Modifier
+                                .width(60.dp)
+                                .height(20.dp)
+                        )
+                    }
+                }
+
+                Column {
+                    Text("Like", color = Color.White)
+                    Image(
+                        painter = painterResource(R.drawable.likes),
+                        contentDescription = "Like",
+                        modifier = Modifier
+                            .size(32.dp)
+                            .padding(2.dp)
+                    )
+                }
             }
-            Spacer(modifier = Modifier.height(15.dp))
+
+            Divider(
+                color = Color.Gray,
+                thickness = 1.dp,
+                modifier = Modifier
+                    .padding(vertical = 8.dp)
+            )
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Start
@@ -150,7 +159,7 @@ fun MovieEditScreen (viewmodel: MovieEditViewmodel, navController: NavController
                             "En general, es una película que motiva a no rendirse y a seguir tus sueños, incluso cuando todo parece estar en tu contra."
                 )
             }
-            Spacer(modifier = Modifier.height(170.dp))
+            Spacer(modifier = Modifier.height(200.dp))
             Row {
                 SecundaryButton(
                    text = "Borrar reseña",
