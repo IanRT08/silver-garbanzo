@@ -29,19 +29,15 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import mx.edu.utez.silvergarbanzo.R
-import mx.edu.utez.silvergarbanzo.ui.components.PeliPreviewCard
 import mx.edu.utez.silvergarbanzo.ui.components.SearchField
 import mx.edu.utez.silvergarbanzo.ui.components.buttons.PrimaryButton
 import mx.edu.utez.silvergarbanzo.ui.components.buttons.SecundaryButton
 import mx.edu.utez.silvergarbanzo.ui.components.cards.PeliSmallCard
-import mx.edu.utez.silvergarbanzo.ui.components.cards.ReseñaCard
 import mx.edu.utez.silvergarbanzo.ui.components.images.IconImage
 import mx.edu.utez.silvergarbanzo.ui.components.images.IconSmall
-import mx.edu.utez.silvergarbanzo.ui.components.images.PromoImage
 import mx.edu.utez.silvergarbanzo.ui.components.texts.Label
 import mx.edu.utez.silvergarbanzo.ui.components.texts.Link
 import mx.edu.utez.silvergarbanzo.ui.theme.SilverGarbanzoTheme
-import mx.edu.utez.silvergarbanzo.viewmodel.RecordViewmodel
 
 @Composable
 fun LikesScreen(viewmodel: LikesViewmodel, navController: NavController){
@@ -190,7 +186,7 @@ fun LikesScreen(viewmodel: LikesViewmodel, navController: NavController){
             ){  Spacer(modifier = Modifier.width(190.dp))
                 PrimaryButton(
                     text = "Mas antiguo",
-                    onClick = { navController.navigate("home") },
+                    onClick = {  },
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -201,19 +197,19 @@ fun LikesScreen(viewmodel: LikesViewmodel, navController: NavController){
             ){  Spacer(modifier = Modifier.width(12.dp))
                 SecundaryButton(
                     text = "1",
-                    onClick = { navController.navigate("home") },
+                    onClick = { },
                     modifier = Modifier.weight(1f)
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 SecundaryButton(
                     text = "2",
-                    onClick = { navController.navigate("home") },
+                    onClick = {  },
                     modifier = Modifier.weight(1f)
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 SecundaryButton(
                     text = "3",
-                    onClick = { navController.navigate("home") },
+                    onClick = {  },
                     modifier = Modifier.weight(1f)
                 )
             }

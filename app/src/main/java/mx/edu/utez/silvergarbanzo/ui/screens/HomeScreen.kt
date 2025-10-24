@@ -29,6 +29,7 @@ import mx.edu.utez.silvergarbanzo.ui.components.images.IconImage
 import mx.edu.utez.silvergarbanzo.ui.theme.SilverGarbanzoTheme
 import mx.edu.utez.silvergarbanzo.viewmodel.HomeViewModel
 import mx.edu.utez.silvergarbanzo.R
+import mx.edu.utez.silvergarbanzo.data.model.Resena
 import mx.edu.utez.silvergarbanzo.ui.components.PeliPreviewCard
 import mx.edu.utez.silvergarbanzo.ui.components.SearchField
 import mx.edu.utez.silvergarbanzo.ui.components.cards.PeliSmallCard
@@ -89,7 +90,7 @@ fun HomeScreen(viewModel: HomeViewModel, navController: NavController) {
                     modifier = Modifier
                         .height(30.dp)
                         .width(90.dp),
-                    onClick = {navController.navigate("login") } //Se cambiara de login a la pantalla de buscar
+                    onClick = {navController.navigate("search") }
                     )}
             Spacer(modifier = Modifier.height(15.dp))
             Row(
@@ -102,7 +103,7 @@ fun HomeScreen(viewModel: HomeViewModel, navController: NavController) {
                 )
                 Spacer(modifier = Modifier.width(55.dp))
                 Link("Más", modifier = Modifier.fillMaxWidth(),textAlign = TextAlign.End) {
-                    navController.navigate("ver_mas")
+                    navController.navigate("registros")
                 }
                 Spacer(modifier = Modifier.width(15.dp))
             }
@@ -160,15 +161,24 @@ fun HomeScreen(viewModel: HomeViewModel, navController: NavController) {
                 Label(
                     "Reseñas populares",
                 )
+                Spacer(modifier = Modifier.width(55.dp))
+                Link("Más", modifier = Modifier.fillMaxWidth(),textAlign = TextAlign.End) {
+                navController.navigate("resenas")
+            }
             }
             Divider()
             Spacer(modifier = Modifier.height(15.dp))
             ReseñaCard(
-                R.drawable.superman,
-                nombrePeli = "Superman",
-                username = "goldengarbanzo",
-                desc = "De las mejores peliculas que he visto este año"
+                resena = Resena(
+                    id = 1,
+                    imagen = R.drawable.superman,
+                    nombrePeli = "Superman",
+                    userName = "silvergarbanzo",
+                    desc = "De las mejores películas que he visto este año"
+                ),
+                onClick = {}
             )
+
         }
     }
 }

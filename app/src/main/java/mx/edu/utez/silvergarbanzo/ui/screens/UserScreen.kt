@@ -114,7 +114,7 @@ fun UserScreen(viewModel: UserViewModel, navController: NavController){
                     R.drawable.next,
                     size = 30,
                     navController = navController,
-                    navigateTo = "login"
+                    navigateTo = "registros"
                 ) //navigate to se cambiara a registros
 
             }
@@ -125,7 +125,7 @@ fun UserScreen(viewModel: UserViewModel, navController: NavController){
                 horizontalArrangement = Arrangement.Start
             ){
                 Spacer(modifier = Modifier.width(15.dp))
-                Link("Likes",){navController.navigate("ver_likes")} //ruta a ver likes
+                Link("Likes",){navController.navigate("like")} //ruta a ver likes
             }
             Divider()
             Row(
@@ -133,7 +133,7 @@ fun UserScreen(viewModel: UserViewModel, navController: NavController){
                 horizontalArrangement = Arrangement.Start
             ){
                 Spacer(modifier = Modifier.width(15.dp))
-                Link("Registros",){navController.navigate("ver_mas")} //ruta a ver registros
+                Link("Registros",){navController.navigate("registros")} //ruta a ver registros
             }
             Divider()
             Spacer(modifier = Modifier.height(50.dp))
@@ -152,14 +152,14 @@ fun UserScreen(viewModel: UserViewModel, navController: NavController){
                     R.drawable.lupa,
                     size = 40,
                     navController = navController,
-                    navigateTo = "login"
+                    navigateTo = "search"
                 ) //navigate to se cambiara a buscar
                 Spacer(modifier = Modifier.width(20.dp))
                 IconSmall(
                     R.drawable.likes,
                     size = 40,
                     navController = navController,
-                    navigateTo = "login"
+                    navigateTo = "like"
                 ) //navigate to se cambiara a likes
                 Spacer(modifier = Modifier.width(20.dp))
                 IconSmall(
@@ -173,7 +173,7 @@ fun UserScreen(viewModel: UserViewModel, navController: NavController){
                     R.drawable.agregar,
                     size = 40,
                     navController = navController,
-                    navigateTo = "agregar"
+                    navigateTo = "add"
                 ) //navigate to se cambiara a agregar
                 Spacer(modifier = Modifier.width(20.dp))
                 IconSmall(

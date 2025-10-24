@@ -35,7 +35,7 @@ fun BuscarScreen(viewModel: BuscarViewModel, navController: NavController) {
             .background(Color(0xFF1b1d23))
             .padding(16.dp)
     ) {
-        // 🔍 Barra de búsqueda + Cancelar
+
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
@@ -63,7 +63,7 @@ fun BuscarScreen(viewModel: BuscarViewModel, navController: NavController) {
             TextButton(
                 onClick = {
                     viewModel.clearSearch()
-                    navController.popBackStack() // 🔙 Regresa al perfil
+                    navController.popBackStack()
                 }
             ) {
                 Text("Cancelar", color = Color.White)
@@ -72,7 +72,6 @@ fun BuscarScreen(viewModel: BuscarViewModel, navController: NavController) {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        // 🔹 Barra de selección de categoría
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -94,7 +93,6 @@ fun BuscarScreen(viewModel: BuscarViewModel, navController: NavController) {
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // 📜 Historial de búsqueda
         Text(
             text = "Historial de búsqueda",
             color = Color.LightGray,

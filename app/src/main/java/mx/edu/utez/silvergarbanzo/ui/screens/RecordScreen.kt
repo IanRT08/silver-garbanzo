@@ -87,7 +87,7 @@ fun RecordScreen(viewmodel: RecordViewmodel, navController: NavController){
                     modifier = Modifier
                         .height(30.dp)
                         .width(90.dp),
-                    onClick = {navController.navigate("login") }
+                    onClick = {navController.navigate("search") }
                 )
             }
             Spacer(modifier = Modifier.height(15.dp))
