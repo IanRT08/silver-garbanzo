@@ -16,8 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
-import androidx.compose.material3.SearchBar
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,12 +34,9 @@ import mx.edu.utez.silvergarbanzo.ui.components.SearchField
 import mx.edu.utez.silvergarbanzo.ui.components.cards.PeliSmallCard
 import mx.edu.utez.silvergarbanzo.ui.components.cards.ReseñaCard
 import mx.edu.utez.silvergarbanzo.ui.components.images.IconSmall
-import mx.edu.utez.silvergarbanzo.ui.components.images.ImageLogin
 import mx.edu.utez.silvergarbanzo.ui.components.images.PromoImage
 import mx.edu.utez.silvergarbanzo.ui.components.texts.Label
 import mx.edu.utez.silvergarbanzo.ui.components.texts.Link
-import mx.edu.utez.silvergarbanzo.ui.components.texts.Title
-import mx.edu.utez.silvergarbanzo.ui.components.texts.UserLabel
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel, navController: NavController) {
