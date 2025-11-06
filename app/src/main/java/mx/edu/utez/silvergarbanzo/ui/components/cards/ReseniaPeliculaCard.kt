@@ -49,7 +49,6 @@ fun ReseniaPeliculaCard(
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
-            // Header: Título y acciones
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -67,7 +66,7 @@ fun ReseniaPeliculaCard(
                         modifier = Modifier.size(24.dp)
                     ) {
                         Icon(
-                            painter = painterResource(R.drawable.ic_edit), // Crea este icono
+                            painter = painterResource(R.drawable.ic_edit),
                             contentDescription = "Editar",
                             tint = Color(0xFF4CAF50)
                         )
@@ -77,7 +76,7 @@ fun ReseniaPeliculaCard(
                         modifier = Modifier.size(24.dp)
                     ) {
                         Icon(
-                            painter = painterResource(R.drawable.ic_delete), // Crea este icono
+                            painter = painterResource(R.drawable.ic_delete),
                             contentDescription = "Eliminar",
                             tint = Color(0xFFF44336)
                         )
@@ -109,10 +108,8 @@ fun ReseniaPeliculaCard(
                     style = MaterialTheme.typography.bodySmall
                 )
             }
-
             Spacer(modifier = Modifier.height(8.dp))
-
-            // Reseña (si existe)
+            //Reseña (si existe)
             if (resenia.resenia.isNotBlank()) {
                 Text(
                     text = resenia.resenia,

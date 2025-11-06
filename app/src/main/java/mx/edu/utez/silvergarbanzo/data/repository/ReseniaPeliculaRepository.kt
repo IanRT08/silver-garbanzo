@@ -16,4 +16,9 @@ class ReseniaPeliculaRepository(private val reseniaPeliculaDao: ReseniaPeliculaD
     suspend fun deleteResenia(resenia: ReseniaPelicula) {
         reseniaPeliculaDao.deleteResenia(resenia)
     }
+
+    suspend fun getReseniaById(id: Int): ReseniaPelicula? {
+        return reseniaPeliculaDao.getReseniaById(id)
+    }
+
 }

@@ -153,7 +153,7 @@ fun RecordScreen(viewModel: RecordViewModel, navController: NavController) {
                         ReseniaPeliculaCard(
                             resenia = resenia,
                             onEditClick = {
-                                // navController.navigate("edit/${resenia.id}")
+                                navController.navigate("edit/${resenia.id}")
                             },
                             onDeleteClick = {
                                 reseniaAEliminar = resenia

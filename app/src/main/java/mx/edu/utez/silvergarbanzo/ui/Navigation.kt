@@ -14,6 +14,7 @@ import mx.edu.utez.silvergarbanzo.ui.screens.AgregarScreen
 import mx.edu.utez.silvergarbanzo.ui.screens.BuscarScreen
 import mx.edu.utez.silvergarbanzo.ui.screens.ChangePasswordScreen
 import mx.edu.utez.silvergarbanzo.ui.screens.ChangePasswordTwoScreen
+import mx.edu.utez.silvergarbanzo.ui.screens.EditarScreen
 import mx.edu.utez.silvergarbanzo.ui.screens.HomeScreen
 import mx.edu.utez.silvergarbanzo.ui.screens.LikesScreen
 import mx.edu.utez.silvergarbanzo.ui.screens.LoginScreen
@@ -27,6 +28,7 @@ import mx.edu.utez.silvergarbanzo.viewmodel.AgregarViewModel
 import mx.edu.utez.silvergarbanzo.viewmodel.BuscarViewModel
 import mx.edu.utez.silvergarbanzo.viewmodel.ChangePasswordTwoViewModel
 import mx.edu.utez.silvergarbanzo.viewmodel.ChangePasswordViewModel
+import mx.edu.utez.silvergarbanzo.viewmodel.EditarViewModel
 import mx.edu.utez.silvergarbanzo.viewmodel.HomeViewModel
 import mx.edu.utez.silvergarbanzo.viewmodel.LikesViewmodel
 import mx.edu.utez.silvergarbanzo.viewmodel.LoginViewModel
@@ -81,10 +83,24 @@ fun Navigation() {
             val viewModel = remember { RecordViewModel(repository) }
             RecordScreen(viewModel, navController)
         }
-        composable("edit") { MovieEditScreen(MovieEditViewmodel(), navController) }
+        //composable("editar") { MovieEditScreen(MovieEditViewmodel(), navController) }
         composable("resenas") {
             val resenasViewModel: ResenasViewModel = viewModel()
             ResenasScreen(resenasViewModel, navController)
+        }
+        composable("edit/{reseniaId}") { backStackEntry ->
+            val reseniaIdString = backStackEntry.arguments?.getString("reseniaId") ?: "0"
+            val reseniaId = reseniaIdString.toIntOrNull() ?: 0
+            println("🟡 NAVIGATION - ID RECIBIDO: $reseniaId (de string: $reseniaIdString)")
+            val viewModel = remember {
+                println("🟢 VIEWMODEL CREADO - ID: $reseniaId")
+                EditarViewModel(repository, reseniaId)
+            }
+            EditarScreen(
+                viewModel = viewModel,
+                navController = navController,
+                reseniaId = reseniaId
+            )
         }
 
     }
