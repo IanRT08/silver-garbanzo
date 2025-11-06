@@ -1,36 +1,69 @@
 package mx.edu.utez.silvergarbanzo.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import mx.edu.utez.silvergarbanzo.data.model.ReseniaPelicula
+import mx.edu.utez.silvergarbanzo.data.repository.ReseniaPeliculaRepository
 
-class AgregarViewModel {
 
-    var titulo = mutableStateOf("")
-    var anioEstreno = mutableStateOf("")
-    var director = mutableStateOf("")
-    var actores = mutableStateOf("")
-    var fechaVista = mutableStateOf("")
-    var calificacion = mutableStateOf(0)
-    var resena = mutableStateOf("")
-    var like = mutableStateOf(false)
-    var vista = mutableStateOf(false)
+class AgregarViewModel(private val repository: ReseniaPeliculaRepository) {
 
-    fun onGuardarClick(onFinish: () -> Unit) {
-        // Aquí se guardaría la película en base de datos o lista
-        onFinish()
+    val tituloPelicula = mutableStateOf("")
+    val resena = mutableStateOf("")
+    val calificacion = mutableStateOf(0f)
+    val like = mutableStateOf(false)
+    val yaLaVi = mutableStateOf(false)
+    val mensajeError = mutableStateOf("")
+    val mostrarError = mutableStateOf(false)
+
+    fun onCalificacionChanged(nuevaCalificacion: Float) {
+        calificacion.value = nuevaCalificacion
     }
 
-    fun limpiarCampos() {
-        titulo.value = ""
-        anioEstreno.value = ""
-        director.value = ""
-        actores.value = ""
-        fechaVista.value = ""
-        calificacion.value = 0
-        resena.value = ""
-        like.value = false
-        vista.value = false
+    fun onLikeChanged(nuevoLike: Boolean) {
+        like.value = nuevoLike
     }
 
+    fun onGuardarClick(onSuccess: () -> Unit) {
+        if (tituloPelicula.value.isBlank()) {
+            mensajeError.value = "¡El título de la película es obligatorio!"
+            mostrarError.value = true
+            return
+        }
 
+        if (calificacion.value == 0f) {
+            mensajeError.value = "¡Debes calificar la película con al menos 1 estrella!"
+            mostrarError.value = true
+            return
+        }
+
+        val nuevaResenia = ReseniaPelicula(
+            tituloPelicula = tituloPelicula.value,
+            resenia = resena.value,
+            calificacion = calificacion.value,
+            like = like.value,
+            yaLaVi = yaLaVi.value
+        )
+
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.insertResenia(nuevaResenia)
+            withContext(Dispatchers.Main) {
+                mensajeError.value = "¡Reseña guardada exitosamente!"
+                mostrarError.value = true
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(1500)
+                    onSuccess()
+                }
+            }
+        }
+    }
+
+    fun limpiarError() {
+        mostrarError.value = false
+        mensajeError.value = ""
+    }
 }

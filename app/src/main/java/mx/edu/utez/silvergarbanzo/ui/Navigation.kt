@@ -1,10 +1,15 @@
 package mx.edu.utez.silvergarbanzo.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.room.Room
+import mx.edu.utez.silvergarbanzo.data.model.VetDatabase
+import mx.edu.utez.silvergarbanzo.data.repository.ReseniaPeliculaRepository
 import mx.edu.utez.silvergarbanzo.ui.screens.AgregarScreen
 import mx.edu.utez.silvergarbanzo.ui.screens.BuscarScreen
 import mx.edu.utez.silvergarbanzo.ui.screens.ChangePasswordScreen
@@ -26,7 +31,7 @@ import mx.edu.utez.silvergarbanzo.viewmodel.HomeViewModel
 import mx.edu.utez.silvergarbanzo.viewmodel.LikesViewmodel
 import mx.edu.utez.silvergarbanzo.viewmodel.LoginViewModel
 import mx.edu.utez.silvergarbanzo.viewmodel.MovieEditViewmodel
-import mx.edu.utez.silvergarbanzo.viewmodel.RecordViewmodel
+import mx.edu.utez.silvergarbanzo.viewmodel.RecordViewModel
 import mx.edu.utez.silvergarbanzo.viewmodel.RecuperarPasswordViewModel
 import mx.edu.utez.silvergarbanzo.viewmodel.RegisterViewModel
 import mx.edu.utez.silvergarbanzo.viewmodel.ResenasViewModel
@@ -35,6 +40,17 @@ import mx.edu.utez.silvergarbanzo.viewmodel.UserViewModel
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
+    val context = LocalContext.current
+
+    val database = remember {
+        Room.databaseBuilder(
+            context.applicationContext,
+            VetDatabase::class.java,
+            "vet_database"
+        ).build()
+    }
+
+    val repository = remember { ReseniaPeliculaRepository(database.reseniaPeliculaDao()) }
 
     NavHost(navController = navController, startDestination = "login") {
         composable("login") {
@@ -55,10 +71,16 @@ fun Navigation() {
         composable("recuperar"){ RecuperarPasswordScreen(RecuperarPasswordViewModel(), navController) }
         composable("home") { HomeScreen(HomeViewModel(), navController) }
         composable("user") { UserScreen(UserViewModel(), navController) }
-        composable("add") { AgregarScreen(AgregarViewModel(), navController) }
+        composable("add"){
+            val viewModel = remember { AgregarViewModel(repository) }
+            AgregarScreen(viewModel = viewModel, navController = navController)
+        }
         composable("like") { LikesScreen(LikesViewmodel(), navController) }
         composable("profile") { UserScreen(UserViewModel(), navController) }
-        composable("registros") { RecordScreen(RecordViewmodel(), navController) }
+        composable("registros") {
+            val viewModel = remember { RecordViewModel(repository) }
+            RecordScreen(viewModel, navController)
+        }
         composable("edit") { MovieEditScreen(MovieEditViewmodel(), navController) }
         composable("resenas") {
             val resenasViewModel: ResenasViewModel = viewModel()

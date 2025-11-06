@@ -3,7 +3,6 @@ package mx.edu.utez.silvergarbanzo.ui.screens
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,8 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Divider
-import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,20 +24,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import mx.edu.utez.silvergarbanzo.R
 import mx.edu.utez.silvergarbanzo.ui.components.PeliPreviewCard
-import mx.edu.utez.silvergarbanzo.ui.components.buttons.Checkbox
 import mx.edu.utez.silvergarbanzo.ui.components.buttons.SecundaryButton
-import mx.edu.utez.silvergarbanzo.ui.components.images.IconImage
-import mx.edu.utez.silvergarbanzo.ui.components.images.IconSmall
 import mx.edu.utez.silvergarbanzo.ui.components.texts.Label
-import mx.edu.utez.silvergarbanzo.ui.components.texts.Link
 import mx.edu.utez.silvergarbanzo.ui.theme.SilverGarbanzoTheme
 import mx.edu.utez.silvergarbanzo.viewmodel.MovieEditViewmodel
-import mx.edu.utez.silvergarbanzo.viewmodel.RecordViewmodel
 
 @Composable
 fun MovieEditScreen (viewmodel: MovieEditViewmodel, navController: NavController){
